@@ -2,7 +2,7 @@
 
 ---
 
-![表紙](network_programmability_automation_cvr.jpg)
+<img src="network_programmability_automation_cvr.jpg" width="50%">
 
 ---
 
