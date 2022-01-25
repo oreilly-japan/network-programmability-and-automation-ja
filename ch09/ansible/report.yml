@@ -1,0 +1,50 @@
+---
+
+  - name: PLAY 1 - IOSのファクト情報を収集
+    hosts: iosxe
+    gather_facts: no
+
+    tasks:
+
+      - name: IOSのファクト情報を収集
+        cisco.ios.ios_facts:
+
+
+  - name: PLAY 2 - EOSのファクト情報を収集
+    hosts: eos
+    gather_facts: no
+
+    tasks:
+
+      - name: EOSのファクト情報を収集
+        arista.eos.eos_facts:
+
+
+  - name: PLAY 3 - NXOSのファクト情報を収集
+    hosts: nxos
+    gather_facts: no
+
+    tasks:
+
+      - name: NXOSのファクト情報を収集
+        cisco.nxos.nxos_facts:
+
+
+  - name: PLAY 4 レポートの作成
+    hosts: "iosxe,eos,nxos"
+    gather_facts: no
+
+    tasks:
+
+      - name: 各ネットワーク装置ごとのレポートの生成
+        template:
+          src: ./reports/facts.j2
+          # これらのサブディレクトリはあらかじめ作成しておく必要があります
+          dest: ./reports/facts/{{ inventory_hostname }}.md
+
+      - name: マスターレポートの作成
+        assemble:
+          src: ./reports/facts/
+          dest: ./reports/master-report.md
+          delimiter: "---"
+        run_once: true

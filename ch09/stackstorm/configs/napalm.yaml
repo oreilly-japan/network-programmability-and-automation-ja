@@ -1,0 +1,13 @@
+---
+html_table_class: napalm
+config_repo: https://github.com/StackStorm/vsrx-configs.git
+
+credentials:
+  local:
+    username: root
+    password: Juniper
+
+devices:
+- hostname: vsrx01
+  driver: junos
+  credentials: local

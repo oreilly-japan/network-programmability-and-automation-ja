@@ -1,0 +1,113 @@
+#/etc/salt/master に以下を追記
+nodegroups:
+  amers:
+    - 'csr*'
+    - 'or'
+    - 'nxos-spine*'
+  emea:
+    - 'vmx* and G@os:junos'
+    - 'or'
+    - 'eos-spine*'
+
+file_roots:
+  base:
+    - /etc/salt/pillar
+    - /etc/salt/templates
+    - /etc/salt/states
+    - /etc/salt/reactors
+  dev: # 開発用途
+    - /home/admin/pillar
+    - /home/admin/states
+
+pillar_roots:
+  base:
+    - /etc/salt/pillar
+  dev: # 開発用途
+    - /home/admin/pillar
+
+# ステートのスケジュール実行
+# schedule:
+#   ntp_state_weekly:
+#     function: state.sls
+#     args:
+#       - ntp
+#     kwargs:
+#       test: true
+#     ret: smtp
+#     when:
+#       - Monday 11:00am
+
+# メール送信
+# smtp.from: ping@mirceaulinic.net
+# smtp.to: jason@networktocode.com
+# smtp.host: localhost
+# smtp.subject: NTP state report
+# smtp.template: salt://ntp_state_report.j2
+
+# CherryPyの有効化
+# rest_cherrypy:
+#   port: 8001
+#   ssl_crt: /etc/nginx/ssl/my_certificate.pem
+#   ssl_key: /etc/nginx/ssl/my_key.key
+
+# ビーコンによる外部プロセスの監視
+# beacons:
+#   inotify:
+#     - /etc/salt/pillar/ntp_peers.sls:
+#         mask:
+#           - modify
+#       disable_during_state_run: True
+
+# エンジンによるイベントの転送
+# engines:
+#   - http_logstash:
+#       url: https://logstash.elastic.co/salt
+#       tags:
+#         - salt/job/*/new
+#         - salt/job/*/ret/*
+
+# リアクターによるバスの監視
+# run_ntp_state:
+#   local.state.sls:
+#     - tgt: {{ data['id'] }}
+#     - arg:
+#       - ntp
+#     - ret: mongo
+
+# Thorium を使ったビジネスロジックの追加
+# thorium_roots:
+#   base:
+#     - /etc/salt/thorium
+
+# Publisher ACL
+# publisher_acl:
+#   mircea:
+#     - .*
+#   jason:
+#     - csr*:
+#       - ntp.*
+#       - test.*
+
+# eAuthによるREST API利用の制限
+#external_auth:
+#  pam:
+#    matt:
+#      - 'vmx*':
+#        - ntp.*
+#        - napalm_yang.*
+#    scott:
+#      - '@runner'
+
+# SDB（Small Database Query）
+# myvault:
+#   driver: vault
+
+# Saltログのレベル調整
+# log_granular_levels:
+#   salt.states: warning
+#   salt.beacon: error
+#   salt.modules: info
+
+# Saltの拡張
+# extension_modules
+#   - /etc/salt/extmods

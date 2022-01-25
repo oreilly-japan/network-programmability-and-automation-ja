@@ -1,0 +1,17 @@
+---
+
+  - name: PLAY 1 - showコマンドによるSNMPの状態確認
+    hosts: iosxe
+    gather_facts: no
+
+    tasks:
+
+      - name: showコマンドの実行
+        cisco.ios.ios_command:
+          commands:
+            - show running-config | inc snmp-server community
+        register: snmp_data
+
+      - name: SNMPのレスポンス結果をデバッグ
+        debug:
+          var: snmp_data

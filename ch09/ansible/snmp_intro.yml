@@ -1,0 +1,17 @@
+---
+
+  - name: PLAY 1 - SNMPコマンドの発行
+    hosts: iosxe
+    gather_facts: no
+
+    tasks:
+
+      - name: TASK1 - SNMPコマンドのデプロイ
+        cisco.ios.ios_command:
+          commands:
+            - show running-config | include snmp
+
+      - name: TASK 2- SNMPコマンドのデプロイ
+        cisco.ios.ios_config:
+          lines:
+            - snmp-server community public RO

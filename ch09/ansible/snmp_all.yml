@@ -1,0 +1,34 @@
+---
+
+  - name: PLAY 1 - SNMPコンフィグレーションの生成
+    hosts: all
+    gather_facts: no
+
+    tasks:
+
+      - name: 各OS用のコンフィグレーションを生成
+        template:
+          src: "./templates/snmp/{{ os }}.j2"
+          dest: "./configs/snmp/{{ inventory_hostname }}.cfg"
+
+
+  - name: PLAY 2 - EOS用のSNMPコンフィグレーションのデプロイを実行
+    hosts: eos
+    gather_facts: no
+
+    tasks:
+
+      - name: EOS用のコンフィグレーションをデプロイ
+        arista.eos.eos_config:
+          src: "./configs/snmp/{{ inventory_hostname }}.cfg"
+
+
+  - name: PLAY 3 - setコマンドを使ったJUNOS用のSNMPコンフィグレーションのデプロイを実行
+    hosts: junos
+    gather_facts: no
+
+    tasks:
+
+      - name: JUNOS用コンフィグレーションをデプロイ
+        junipernetworks.junos.junos_config:
+          src: "./configs/snmp/{{ inventory_hostname }}.cfg"

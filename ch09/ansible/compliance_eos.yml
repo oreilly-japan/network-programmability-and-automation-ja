@@ -1,0 +1,30 @@
+---
+
+  - name: PLAY 1  EOSのコンプライアンスチェックを実施
+    hosts: eos
+    gather_facts: no
+
+    tasks:
+
+      - name: VLANのJSONレスポンスの取得
+        arista.eos.eos_command:
+          commands:
+            - show vlan brief | json
+        register: vlan_data
+
+      - name: JSONとしてVLANデータをデバッグ
+        debug:
+          var: vlan_data
+
+      - name: 取得したデータからVLAN部分のみを取り出し、変数existing_vlan_idsを作成
+        set_fact:
+          existing_vlan_ids: "{{ vlan_data.stdout.0.vlans.keys() }}"
+
+      - name: existing_vlan_idsをデバッグ
+        debug:
+          var: existing_vlan_ids
+
+      - name: コンプライアンスチェックの実行
+        assert:
+          that:
+            - "'20' in existing_vlan_ids"

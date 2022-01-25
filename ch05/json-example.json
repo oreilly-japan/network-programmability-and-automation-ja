@@ -1,0 +1,20 @@
+{
+  "hostname": "CORESW01",
+  "vendor": "Cisco",
+  "isAlive": true,
+  "uptime": 123456,
+  "users": {
+    "admin": 15,
+    "storage": 10
+  },
+  "vlans": [
+    {
+      "vlan_name": "VLAN20",
+      "vlan_id": 20
+    },
+    {
+      "vlan_name": "VLAN30",
+      "vlan_id": 30
+    }
+  ]
+}

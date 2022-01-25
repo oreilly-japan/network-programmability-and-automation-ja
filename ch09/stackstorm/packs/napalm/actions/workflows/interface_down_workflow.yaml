@@ -1,0 +1,41 @@
+---
+version: 1.0
+
+description: Interface Down Workflow
+
+input:
+  - hostname
+  - interface
+  - skip_show_interface
+
+tasks:
+  decide_task:
+    action: "core.noop"
+    next:
+      - when: "{{ ctx('skip_show_interface') != True }}"
+        do: show_interface
+      - when: "{{ ctx('skip_show_interface') == True }}"
+        do: show_interface_counters
+
+  show_interface:
+    action: "napalm.get_interfaces"
+    input:
+      hostname: "{{ ctx('hostname') }}"
+      interface: "{{ ctx('interface') }}"
+    next:
+      - when: "{{ succeeded() }}"
+        do: show_interface_counters
+
+  show_interface_counters:
+    action: "napalm.get_interfaces"
+    input:
+      hostname: "{{ ctx('hostname') }}"
+      interface: "{{ ctx('interface') }}"
+    next:
+      - when: "{{ succeeded() }}"
+        do: show_log
+
+  show_log:
+    action: "napalm.get_log"
+    input:
+      hostname: "{{ ctx('hostname') }}"

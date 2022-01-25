@@ -1,0 +1,23 @@
+# {{ inventory_hostname }}
+
+## ファクト情報
+
+Serial Number: {{ ansible_net_serialnum }}
+
+OS Version:   {{ ansible_net_version }}
+
+## 隣接関係
+
+| 装置名 | ローカルインタフェース | 隣接装置名 | 隣接インタフェース |
+|--------|-----------------|----------|--------------------|
+{% for interface, neighbors in ansible_net_neighbors.items() %}
+{% for neighbor in neighbors %}
+| {{ inventory_hostname }} | {{ interface }} | {{ neighbor.host }} |
+{{ neighbor.port }} |
+{% endfor %}
+{% endfor %}
+
+## インタフェースのリスト
+{% for interface in ansible_net_interfaces.keys() %}
+  - {{ interface }}
+{% endfor %}

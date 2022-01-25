@@ -1,0 +1,11 @@
+---
+ospf:
+  - id: 10
+    router-id: 10.10.10.10
+    network:
+      - ip: 10.0.10.1
+        mask: 0.0.0.0
+        area: 0
+      - ip: 10.0.20.1
+        mask: 0.0.0.0
+        area: 0

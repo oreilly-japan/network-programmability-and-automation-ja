@@ -1,0 +1,11 @@
+---
+name: orquesta-basic
+pack: examples
+description: 任意のLinuxコマンドを実行するワークフロー。
+runner_type: orquesta
+entry_point: workflows/orquesta-basic.yaml
+enabled: true
+parameters:
+  cmd:
+    required: true
+    type: string

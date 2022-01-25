@@ -1,0 +1,9 @@
+{% for interface in interface_list %}
+interface {{ interface.name }}
+  description {{ interface.desc }}
+{% endfor %}
+!
+{% block http %}
+  no ip http server
+  no ip http secure-server
+{% endblock %}

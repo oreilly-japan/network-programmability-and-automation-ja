@@ -1,0 +1,17 @@
+---
+name: "sample_rule_lldp_notify"
+pack: "napalm"
+enabled: true
+description: "LLDPネイバー数の減少を通知します。"
+
+trigger:
+  type: "napalm.LLDPNeighborDecrease"
+  parameters: {}
+
+criteria: {}
+
+action:
+  ref: slack.post_message
+  parameters:
+    message: "警告：{{trigger.device}}のLLDPネイバー数が{{trigger.newpeers}}に低下しました(元の値：{{trigger.oldpeers}})"
+    channel: '#general'

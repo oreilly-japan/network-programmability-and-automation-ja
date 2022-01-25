@@ -1,0 +1,17 @@
+---
+name: "sample_lldp_remediate"
+pack: "napalm"
+enabled: true
+description: "LLDPネイバー数が減少した場合、インタフェースを復旧させます。"
+
+trigger:
+  type: "napalm.LLDPNeighborDecrease"
+  parameters: {}
+
+criteria: {}
+
+action:
+  ref: napalm.loadconfig
+  parameters:
+    hostname: "{{ trigger.device }}"
+    config_file: /vagrant/remediation_config.txt
