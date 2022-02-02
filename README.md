@@ -6,7 +6,8 @@
 
 ---
 
-本リポジトリはオライリー・ジャパン発行書籍『[ネットワーク自動化とプログラマビリティ](https://www.oreilly.co.jp/books/9784873119816/)』のサポートサイトです。
+本リポジトリはオライリー・ジャパン発行書籍『[ネットワーク自動化とプログラマビリティ](https://www.oreilly.co.jp/books/9784873119816/)』のサポートサイトです。（原書『[Network Programmability and Automation](https://www.oreilly.com/library/view/network-programmability-and/9781491931240/)』）
+
 
 ## サンプルコード
 
@@ -27,10 +28,7 @@
 
 コードやデータの解説は本書籍をご覧ください。
 
-## ライセンス
-
-〓要確認〓
-
 ## 正誤表
 
 まだありません。誤植など間違いを見つけた方は、japan@oreilly.co.jpまでお知らせください。
+なお、原書のErrataは[こちら](https://www.oreilly.com/catalog/errata.csp?isbn=0636920042082)になります。
